@@ -19,7 +19,23 @@ describe 'WebmoneyEvents API' do
 
   describe 'Feed requests' do
     it 'get without params' do
-      events.feed.get
+      response = events.feed.get
+
+      expect(response['feed'].count).to be > 1
+    end
+  end
+
+  describe 'Universal request api' do
+    it 'unhandled response' do
+      response = events.api_request(get: 'Feed/New').request
+
+      expect(response).to be_a_kind_of(String)
+    end
+
+    it 'parse json response' do
+      response = events.api_request(get: 'Feed/New').response
+
+      expect(response).to be_a_kind_of(Array)
     end
   end
 end
