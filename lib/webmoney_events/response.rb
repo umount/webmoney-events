@@ -11,6 +11,8 @@ module WebmoneyEvents
         if response.is_a?(RestClient::Response)
           if response.code == 200
             fetch_data(response)
+          elsif response.code == 204
+            response
           else
             raise WebmoneyEvents::Errors::ExternalServiceUnavailable.new(
               "#{response.code} / #{response.body}"

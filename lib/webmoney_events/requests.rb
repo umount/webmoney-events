@@ -33,14 +33,24 @@ module WebmoneyEvents
       end
 
       def request(params={})
-        headers = {accessToken: config[:access_token]}
+        headers = {
+          accessToken: config[:access_token],
+          'Content-Type': 'application/json'
+        }
 
-        RestClient::Request.execute(
+        params_request = {
           method: request_method,
           url: request_url,
-          params: params,
           headers: headers
-        )
+        }
+
+        if request_method.to_s == 'get'
+          params_request.merge!(headers: headers.merge(params: params))
+        else
+          params_request.merge!(payload: params.to_json)
+        end
+
+        RestClient::Request.execute(params_request)
       end
 
       def api_request(params)

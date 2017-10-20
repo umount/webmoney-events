@@ -4,6 +4,7 @@ describe 'WebmoneyEvents API' do
   let(:events) {
     WebmoneyEvents.new(
       access_token: Settings.events.access_token,
+      #api_url: 'http://localhost:8080'
     )
   }
 
@@ -36,6 +37,66 @@ describe 'WebmoneyEvents API' do
       response = events.api_request(get: 'Feed/New').response
 
       expect(response).to be_a_kind_of(Array)
+    end
+  end
+
+  describe 'Group requests' do
+    it 'create new public group' do
+      allow_any_instance_of(
+        WebmoneyEvents::Requests::Group
+      ).to receive(:response).and_return({
+        "uid"=>"dc5d554c-2b3d-48fe-8a7d-a76c7deceb7e"
+      })
+
+      # visibility: public | private | secret | wmpublic
+      response = events.group.create(
+        name: 'Test public group',
+        desc: 'Description',
+        visibility: 'public'
+      )
+
+      expect(response).to include('uid')
+    end
+
+    # https://events-api.webmoney.ru/Help/Api/GET-Group-Info_groupUid
+    it 'get group info' do
+      response = events.group.info('31c64237-232d-489f-800c-5f75c98e31ac')
+      expect(response['uid']).to eq('31c64237-232d-489f-800c-5f75c98e31ac')
+    end
+
+    # https://events-api.webmoney.ru/Help/Api/POST-Event-Hide
+    it 'hide group' do
+      expect {
+        events.group.hide('31c64237-232d-489f-800c-5f75c98e31ac')
+      }.not_to raise_error
+    end
+
+    # https://events-api.webmoney.ru/Help/Api/POST-Group-Leave
+    it 'leave group' do
+      expect {
+        events.group.leave('dc5d554c-2b3d-48fe-8a7d-a76c7deceb7e')
+      }.not_to raise_error
+    end
+
+    # https://events-api.webmoney.ru/Help/Api/POST-Group-CreateBusiness
+    it 'create business group' do
+      allow_any_instance_of(
+        WebmoneyEvents::Requests::Group
+      ).to receive(:response).and_return({
+        "uid"=>"a449bb54-ed78-4cd1-a16e-ed6f2a580216"
+      })
+
+      response = events.group.create_business(
+        name: 'Test business group',
+        desc: 'Description',
+      )
+
+      expect(response).to include('uid')
+    end
+  end
+
+  describe 'Event requests' do
+    it 'create new post' do
     end
   end
 end
