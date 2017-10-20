@@ -65,7 +65,7 @@ describe 'WebmoneyEvents API' do
       expect(response['uid']).to eq('31c64237-232d-489f-800c-5f75c98e31ac')
     end
 
-    # https://events-api.webmoney.ru/Help/Api/POST-Event-Hide
+    # https://events-api.webmoney.ru/Help/Api/POST-Group-Hide
     it 'hide group' do
       expect {
         events.group.hide('31c64237-232d-489f-800c-5f75c98e31ac')
@@ -97,6 +97,7 @@ describe 'WebmoneyEvents API' do
   end
 
   describe 'Event requests' do
+    # https://events-api.webmoney.ru/Help/Api/POST-Event-Post
     it 'create new event post' do
       response = events.event.create(
         group: 'a449bb54-ed78-4cd1-a16e-ed6f2a580216',
@@ -107,9 +108,9 @@ describe 'WebmoneyEvents API' do
     end
   end
 
-  # https://events-api.webmoney.ru/Help/Api/POST-WidgetComments-Create
-  # https://events-api.webmoney.ru/Help/Api/POST-WidgetComments-CreateForEvent
   describe 'Widget Comments requests' do
+    # https://events-api.webmoney.ru/Help/Api/POST-WidgetComments-Create
+    # https://events-api.webmoney.ru/Help/Api/POST-WidgetComments-CreateForEvent
     it 'create for event' do
       response = events.widget.create(
         event: 252102785,
