@@ -41,6 +41,7 @@ describe 'WebmoneyEvents API' do
   end
 
   describe 'Group requests' do
+    # https://events-api.webmoney.ru/Help/Api/POST-Group-CreateRegular
     it 'create new public group' do
       allow_any_instance_of(
         WebmoneyEvents::Requests::Group
@@ -96,7 +97,28 @@ describe 'WebmoneyEvents API' do
   end
 
   describe 'Event requests' do
-    it 'create new post' do
+    it 'create new event post' do
+      response = events.event.create(
+        group: 'a449bb54-ed78-4cd1-a16e-ed6f2a580216',
+        text: 'This is a new, automatically generated event text'
+      )
+
+      expect(response).to include('id')
+    end
+  end
+
+  # https://events-api.webmoney.ru/Help/Api/POST-WidgetComments-Create
+  # https://events-api.webmoney.ru/Help/Api/POST-WidgetComments-CreateForEvent
+  describe 'Widget Comments requests' do
+    it 'create for event' do
+      response = events.widget.create(
+        event: 252102785,
+        url: 'https://news.dev.local',
+        branches: 'tree',
+        design: 'light'
+      )
+
+      expect(response['ident']).to include('uid')
     end
   end
 end
