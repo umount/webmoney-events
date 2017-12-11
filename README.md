@@ -61,6 +61,13 @@ response = events.group.create_business(
   desc: 'Description',
 )
 
+# get group members
+# https://events-api.webmoney.ru/Help/Api/GET-Group-Members
+
+response = events.group.members(
+  'dc5d554c-2b3d-48fe-8a7d-a76c7deceb7e'
+)
+
 # create new event post
 # https://events-api.webmoney.ru/Help/Api/POST-Event-Post
 

@@ -45,6 +45,14 @@ module WebmoneyEvents
 
         response(parse_params)
       end
+
+      def members(uid, options={})
+        api_request get: 'Group/Members'
+
+        parse_params = {"groupUid": uid}.merge(options)
+
+        response(parse_params)
+      end
     end
   end
 end
