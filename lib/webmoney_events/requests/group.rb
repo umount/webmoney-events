@@ -53,6 +53,18 @@ module WebmoneyEvents
 
         response(parse_params)
       end
+
+      def remove_member(uid, wmid)
+        api_request post: 'Group/RemoveFromGroup'
+
+        response({"groupUid": uid, "wmid": wmid})
+      end
+
+      def set_admin(uid, wmid)
+        api_request post: 'Group/SetAdminRights'
+
+        response({"groupUid": uid, "wmid": wmid})
+      end
     end
   end
 end
