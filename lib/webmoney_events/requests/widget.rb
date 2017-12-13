@@ -26,6 +26,28 @@ module WebmoneyEvents
 
         response(parse_params)
       end
+
+      def update(uid, params)
+        api_request post: 'WidgetComments/Update'
+
+        parse_params = {
+          ident: { uid: uid }
+        }.merge(params)
+
+        response(parse_params)
+      end
+
+      def delete(uid)
+        api_request post: 'WidgetComments/Delete'
+
+        response({uid: uid})
+      end
+
+      def list(group_uid)
+        api_request get: 'WidgetComments/List'
+
+        response({groupUid: group_uid})
+      end
     end
   end
 end
