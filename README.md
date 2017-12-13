@@ -1,9 +1,9 @@
-## Information
+# Information
 
 This gems for WebMoney Events API.
 https://events-api.webmoney.ru
 
-## Installation
+# Installation
 
 Add this line to your application's Gemfile:
 
@@ -17,7 +17,7 @@ And then execute:
 $ bundle
 ```
 
-## Usage
+# Usage
 
 Create events instanse, use you API secret access token
 
@@ -27,14 +27,14 @@ events = WebmoneyEvents.new(access_token: 'xxxxxxxxxxxx')
 
 ```
 
-# Feed requests
+## Feed requests
 
 ```ruby
 # get feed
 feed = events.feed.get
 ```
 
-# Group requests
+## Group requests
 
 ```ruby
 # https://events-api.webmoney.ru/Help/Api/POST-Group-CreateRegular
@@ -76,7 +76,7 @@ response = events.group.create_business(
 response = events.group.members('dc5d554c-2b3d-48fe-8a7d-a76c7deceb7e')
 ```
 
-# Post requests
+## Post requests
 
 ```ruby
 # create new event post
@@ -88,7 +88,7 @@ response = events.event.create(
 )
 ```
 
-# Widget comments requests
+## Widget comments requests
 
 ```ruby
 # create
@@ -121,7 +121,7 @@ response = events.widget.list('dc5d554c-2b3d-48fe-8a7d-a76c7deceb7e')
 
 ```
 
-# Universal
+## Universal
 
 ```ruby
 # Universal requests without parse
