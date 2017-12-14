@@ -13,6 +13,24 @@ module WebmoneyEvents
 
         response(parse_params)
       end
+
+      def delete(id)
+        api_request post: 'Event/Del'
+
+        response({eventId: id})
+      end
+
+      def hide(id)
+        api_request post: 'Event/Hide'
+
+        response({eventId: id})
+      end
+
+      def update(params={})
+        api_request post: 'Event/Update'
+
+        response(params)
+      end
     end
   end
 end
