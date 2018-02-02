@@ -14,12 +14,12 @@ module WebmoneyEvents
           elsif response.code == 204
             response
           else
-            raise WebmoneyEvents::Errors::ExternalServiceUnavailable.new(
+            raise WebmoneyEvents::Errors::ExternalServiceError.new(
               "#{response.code} / #{response.body}"
             )
           end
         else
-          raise WebmoneyEvents::Errors::ExternalServiceUnavailable.new(
+          raise WebmoneyEvents::Errors::ExternalServiceError.new(
             "WTF? #{response.inspect}"
           )
         end

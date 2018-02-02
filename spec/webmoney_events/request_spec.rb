@@ -121,5 +121,15 @@ describe 'WebmoneyEvents API' do
 
       expect(response['ident']).to include('uid')
     end
+
+    it 'wrong prams event id' do
+      expect {
+        response = events.widget.create(
+          url: 'https://news.dev.local',
+          branches: 'tree',
+          design: 'light'
+        )
+      }.to raise_error(WebmoneyEvents::Errors::ExternalServiceError, /400/)
+    end
   end
 end

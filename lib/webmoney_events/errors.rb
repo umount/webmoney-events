@@ -18,6 +18,6 @@ module WebmoneyEvents
     class NotFound < CustomError;                   self.code = 404 end
     class TooManyRequests < CustomError;            self.code = 429 end
     class Internal < CustomError;                   self.code = 500 end
-    class ExternalServiceUnavailable < CustomError; self.code = 503 end
+    class ExternalServiceError < CustomError;       self.code = 503 end
   end
 end

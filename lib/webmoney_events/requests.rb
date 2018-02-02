@@ -50,7 +50,11 @@ module WebmoneyEvents
           params_request.merge!(payload: params.to_json)
         end
 
-        RestClient::Request.execute(params_request)
+        begin
+          RestClient::Request.execute(params_request)
+        rescue RestClient::ExceptionWithResponse => e
+          e.response
+        end
       end
 
       def api_request(params)
